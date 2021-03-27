@@ -36,6 +36,7 @@ public class WordDictionaryTests {
         assert(dict.contains("neptune"));
         assert(dict.contains("mars"));
         assert(dict.contains("jupiter"));
+        assert(dict.contains("salt lake city")); //ensures multi-word names work
     }
 
 }
