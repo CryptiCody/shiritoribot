@@ -2,6 +2,7 @@ package edu.regent.shiritoribot;
 
 public class ShiritoriGame {
 
+    /*
     public void handleUserWord(String wordSubmission) {
 
         try{
@@ -23,5 +24,6 @@ public class ShiritoriGame {
         if(!isInLegalWordDictionary(word)) return false;
         return true;
     }
+    */
 
 }
