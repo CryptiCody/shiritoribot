@@ -11,6 +11,10 @@ public class WordDictionaryImpl implements WordDictionary {
         this.wordList = Arrays.asList(wordList);
     }
 
+    public WordDictionaryImpl(List<String> wordList) {
+        this.wordList = wordList;
+    }
+
     @Override
     public boolean contains(String word) {
         return wordList.stream().anyMatch(word::equalsIgnoreCase);

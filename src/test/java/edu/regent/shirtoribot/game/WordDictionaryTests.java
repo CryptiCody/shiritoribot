@@ -4,6 +4,8 @@ import edu.regent.shiritoribot.game.WordDictionary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 public class WordDictionaryTests {
     private WordDictionary dict;
 
@@ -23,6 +25,17 @@ public class WordDictionaryTests {
     public void contains_isNotCaseSensitive() {
         dict = WordDictionary.of("Word");
         assert(dict.contains("wORd"));
+    }
+
+    @Test
+    public void fromFile_loadsAllWords() throws Exception {
+        File dictFile = new File(getClass().getClassLoader().getResource("simpleDictionary.txt").getFile());
+        dict = WordDictionary.fromFile(dictFile);
+
+        assert(dict.contains("europe"));
+        assert(dict.contains("neptune"));
+        assert(dict.contains("mars"));
+        assert(dict.contains("jupiter"));
     }
 
 }
