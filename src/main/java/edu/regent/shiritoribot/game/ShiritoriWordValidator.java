@@ -3,13 +3,13 @@ package edu.regent.shiritoribot.game;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShiritoriGame {
+public class ShiritoriWordValidator {
 
     private WordDictionary wordDictionary;
     private List<String> usedWords = new ArrayList<>();
     private String previousWord;
 
-    public ShiritoriGame(WordDictionary wordDictionary) {
+    public ShiritoriWordValidator(WordDictionary wordDictionary) {
         this.wordDictionary = wordDictionary;
     }
 

@@ -1,7 +1,7 @@
 package edu.regent.shirtoribot.game;
 
 import edu.regent.shiritoribot.game.EliminationException;
-import edu.regent.shiritoribot.game.ShiritoriGame;
+import edu.regent.shiritoribot.game.ShiritoriWordValidator;
 import edu.regent.shiritoribot.game.WordDictionary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +10,9 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ShitoriGameTests {
+public class ShiritoriWordValidatorTests {
 
-    private ShiritoriGame game;
+    private ShiritoriWordValidator game;
 
     private WordDictionary mockDictionary;
 
@@ -20,7 +20,7 @@ public class ShitoriGameTests {
     public void setup() {
         mockDictionary = mock(WordDictionary.class);
         when(mockDictionary.contains(anyString())).thenReturn(true);
-        game = new ShiritoriGame(mockDictionary);
+        game = new ShiritoriWordValidator(mockDictionary);
     }
 
     @Test
