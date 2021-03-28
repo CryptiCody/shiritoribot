@@ -14,7 +14,7 @@ public class IdleController extends ChannelController {
 
     @Override
     protected void init() {
-
+        clearChannelHistory();
     }
 
     @Override

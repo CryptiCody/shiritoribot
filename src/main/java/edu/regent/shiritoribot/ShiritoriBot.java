@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.IOException;
 
 public class ShiritoriBot {
 
@@ -37,7 +39,11 @@ public class ShiritoriBot {
     }
 
     public static WordDictionary getWordDictionary() {
-        return WordDictionary.of("word", "dog", "god", "doge", "egg", "game", "eat");
+        try {
+            return WordDictionary.fromFile(new File(ShiritoriBot.class.getClassLoader().getResource("usa.txt").getFile()));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 
     private static CommandClient buildCommandManager() {

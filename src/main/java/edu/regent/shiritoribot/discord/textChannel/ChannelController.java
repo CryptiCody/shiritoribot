@@ -21,5 +21,9 @@ public abstract class ChannelController extends ListenerAdapter {
         return this.channel.getId().equals(channel.getId());
     }
 
+    protected void clearChannelHistory() {
+        channel.purgeMessages(channel.getHistory().getRetrievedHistory());
+    }
+
     protected abstract void init();
 }

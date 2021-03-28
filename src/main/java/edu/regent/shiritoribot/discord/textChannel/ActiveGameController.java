@@ -5,7 +5,9 @@ import edu.regent.shiritoribot.discord.PlayerStatus;
 import edu.regent.shiritoribot.discord.ShiritoriPlayer;
 import edu.regent.shiritoribot.game.EliminationException;
 import edu.regent.shiritoribot.game.ShiritoriWordValidator;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -23,6 +25,7 @@ public class ActiveGameController extends ChannelController {
     private ShiritoriPlayer activePlayer;
 
     private ShiritoriWordValidator wordValidator;
+    private Message nextPlayerDisplayMessage;
 
     public ActiveGameController(TextChannel channel, Collection<ShiritoriPlayer> initialPlayers) {
         super(channel);
@@ -34,6 +37,7 @@ public class ActiveGameController extends ChannelController {
 
     @Override
     protected void init() {
+        clearChannelHistory();
         for(ShiritoriPlayer player : alivePlayers) {
             player.setStatus(PlayerStatus.ALIVE);
         }
@@ -46,6 +50,7 @@ public class ActiveGameController extends ChannelController {
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         if(!isControlledChannel(event.getChannel())) return;
+        if(ShiritoriBot.isAuthorOf(event.getMessage())) return;
         if(!isHisTurn(event.getMember())) {
             event.getMessage().delete().queue();
             return;
@@ -97,7 +102,13 @@ public class ActiveGameController extends ChannelController {
             } else {
                 activePlayer = alivePlayers.get(indexOfNextPlayer);
             }
-            activePlayer.setStatus(PlayerStatus.ACTIVE);
+
+            System.out.println("Next Player: " + activePlayer.getName());
+            if(nextPlayerDisplayMessage != null) {
+                nextPlayerDisplayMessage.delete().complete();
+            }
+            nextPlayerDisplayMessage = channel.sendMessage("Next Player: " + activePlayer.getName()).complete();
+
         }
     }
 

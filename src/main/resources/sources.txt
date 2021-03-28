@@ -1,0 +1,2 @@
+usa.txt dictionary world file from:
+    http://www.gwicks.net/dictionaries.htm

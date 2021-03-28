@@ -1,12 +1,8 @@
 package edu.regent.shiritoribot.game;
 
-import com.opencsv.CSVReader;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.StreamTokenizer;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

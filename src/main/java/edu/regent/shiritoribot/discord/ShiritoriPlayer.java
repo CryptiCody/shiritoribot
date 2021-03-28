@@ -26,8 +26,6 @@ public class ShiritoriPlayer extends ListenerAdapter {
         this.status = status;
         try {
             member.modifyNickname(originalNickname + status.getSuffix()).complete();
-            member.modifyNickname(originalNickname + status.getSuffix()).complete();
-            member.modifyNickname(originalNickname + status.getSuffix()).complete();
         } catch (Exception e) {
             //do nothing (owner doesnt work correctly)
         }
@@ -39,6 +37,10 @@ public class ShiritoriPlayer extends ListenerAdapter {
 
     public Member getMember() {
         return member;
+    }
+
+    public String getName() {
+        return originalNickname;
     }
 
     @Override
