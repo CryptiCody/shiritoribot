@@ -25,7 +25,7 @@ public class ShiritoriPlayer extends ListenerAdapter {
     public void setStatus(PlayerStatus status) {
         this.status = status;
         try {
-            member.modifyNickname(originalNickname + status.getSuffix()).complete();
+            //member.modifyNickname(originalNickname + status.getSuffix()).complete();
         } catch (Exception e) {
             //do nothing (owner doesnt work correctly)
         }
@@ -50,6 +50,6 @@ public class ShiritoriPlayer extends ListenerAdapter {
 
     public void destroy() {
         ShiritoriBot.jda.removeEventListener(this);
-        member.modifyNickname(originalNickname).queue();
+        //member.modifyNickname(originalNickname).queue();
     }
 }

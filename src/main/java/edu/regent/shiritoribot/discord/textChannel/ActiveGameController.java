@@ -60,8 +60,10 @@ public class ActiveGameController extends ChannelController {
         try {
             wordValidator.submitWord(chosenWord);
             activePlayerLives();
+            event.getMessage().addReaction("\u2705").queue();
         } catch (EliminationException e) {
             activePlayerDies();
+            event.getMessage().addReaction("\u274C").queue();
         }
     }
 
