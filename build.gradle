@@ -20,6 +20,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.5.15'
     compile 'net.dv8tion:JDA:4.2.0_247'
     implementation 'com.jagrosh:jda-utilities-command:3.0.5'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.4'
 }
 
 test {
