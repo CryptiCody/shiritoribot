@@ -3,7 +3,7 @@ package edu.regent.shiritoribot.discord.command.subCommands;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import edu.regent.shiritoribot.ShiritoriBot;
-import edu.regent.shiritoribot.discord.textChannel.ShiritoriTextChannelController;
+import edu.regent.shiritoribot.discord.textChannel.IdleController;
 
 
 public class RegisterChannelCommand extends Command {
@@ -16,7 +16,7 @@ public class RegisterChannelCommand extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        ShiritoriBot.jda.addEventListener(new ShiritoriTextChannelController(event.getTextChannel()));
-        event.reply("channel registered!");
+        ShiritoriBot.jda.addEventListener(new IdleController(event.getTextChannel()));
+        event.reply("channel registered!!!!");
     }
 }
