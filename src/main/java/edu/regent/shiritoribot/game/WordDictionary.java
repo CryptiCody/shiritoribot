@@ -12,7 +12,7 @@ public interface WordDictionary {
     public boolean contains(String word);
 
     public static WordDictionary of(String... wordList) {
-        return new WordDictionaryImpl(wordList);
+        return new SimpleWordDictionaryImpl(wordList);
     }
 
     public static WordDictionary fromFile(File file) throws IOException {
@@ -23,6 +23,6 @@ public interface WordDictionary {
             //System.out.println(scanner.next());
             wordList.add(scanner.next().trim());
         }
-        return new WordDictionaryImpl(wordList);
+        return new SimpleWordDictionaryImpl(wordList);
     }
 }

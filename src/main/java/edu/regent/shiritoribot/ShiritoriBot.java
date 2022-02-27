@@ -8,6 +8,7 @@ import edu.regent.shiritoribot.game.WordDictionary;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
@@ -40,7 +41,7 @@ public class ShiritoriBot {
 
     public static WordDictionary getWordDictionary() {
         try {
-            return WordDictionary.fromFile(new File(ShiritoriBot.class.getClassLoader().getResource("usa.txt").getFile()));
+            return WordDictionary.fromFile(new File(ShiritoriBot.class.getClassLoader().getResource("CollinsScrabbleWords(2019).txt").getFile()));
         } catch (IOException e) {
             throw new RuntimeException();
         }
