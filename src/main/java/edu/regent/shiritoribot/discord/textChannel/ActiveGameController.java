@@ -20,12 +20,15 @@ import java.util.List;
 
 public class ActiveGameController extends ChannelController {
 
+    private static long TURN_TIMEOUT_MILLIS = 15_000;
+
     private List<ShiritoriPlayer> alivePlayers;
     private List<ShiritoriPlayer> deadPlayers;
     private ShiritoriPlayer activePlayer;
 
     private ShiritoriWordValidator wordValidator;
     private Message nextPlayerDisplayMessage;
+    private Thread timeoutThread;
 
     public ActiveGameController(TextChannel channel, Collection<ShiritoriPlayer> initialPlayers) {
         super(channel);
@@ -87,6 +90,11 @@ public class ActiveGameController extends ChannelController {
         nextPlayer();
     }
 
+    private void activePlayerTimeout() {
+        channel.sendMessage("Time's Up!").complete();
+        activePlayerDies();
+    }
+
     private void activePlayerDies() {
         activePlayer.setStatus(PlayerStatus.DEAD);
         alivePlayers.remove(activePlayer);
@@ -111,7 +119,23 @@ public class ActiveGameController extends ChannelController {
             }
             nextPlayerDisplayMessage = channel.sendMessage("Next Player: " + activePlayer.getName()).complete();
 
+            resetTimeout();
         }
+    }
+
+    private void resetTimeout() {
+        if(timeoutThread != null) {
+            timeoutThread.interrupt();
+        }
+        timeoutThread = new Thread(() -> {
+            try {
+                Thread.sleep(TURN_TIMEOUT_MILLIS);
+                activePlayerTimeout();
+            } catch (InterruptedException e) {
+                //timeout cancelled, do nothing
+            }
+        });
+        timeoutThread.start();
     }
 
     private boolean isHisTurn(Member member) {
