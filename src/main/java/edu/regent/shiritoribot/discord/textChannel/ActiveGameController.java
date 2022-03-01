@@ -77,6 +77,7 @@ public class ActiveGameController extends ChannelController {
     }
 
     private void close() {
+        if(timeoutThread != null) timeoutThread.interrupt();
         for(ShiritoriPlayer player : alivePlayers) {
             player.destroy();
         }

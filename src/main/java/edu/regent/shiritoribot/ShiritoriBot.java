@@ -43,7 +43,7 @@ public class ShiritoriBot {
         try {
             return WordDictionary.fromFile(new File(ShiritoriBot.class.getClassLoader().getResource("CollinsScrabbleWords(2019).txt").getFile()));
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 

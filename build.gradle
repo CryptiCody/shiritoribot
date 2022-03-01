@@ -1,10 +1,11 @@
 plugins {
     id('java')
     id('maven-publish')
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'edu.regent'
-version '1.0-SNAPSHOT'
+version '1.1'
 
 
 sourceCompatibility = 1.17
@@ -16,10 +17,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-engine', version:'5.4.0'
-    testImplementation 'org.mockito:mockito-core:4.3.1'
+
     implementation 'net.dv8tion:JDA:4.2.0_247'
     implementation 'com.jagrosh:jda-utilities-command:3.0.5'
+
+    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-engine', version:'5.4.0'
+    testImplementation 'org.mockito:mockito-core:4.3.1'
 }
 
 test {
@@ -73,10 +76,24 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-jar {
-    from { fileTree('lib').collect { zipTree(it) } }
+shadowJar {
+    archiveClassifier.set('')
 }
 
+artifacts {
+    shadowJar
+}
+
+build.dependsOn(shadowJar)
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'edu.regent.shiritoribot.ShiritoriBot'
+        )
+    }
+    from { fileTree('lib').collect { zipTree(it) } }
+}
 
 artifacts {
     archives javadocJar
