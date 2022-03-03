@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ActiveGameController extends ChannelController {
 
-    private static long TURN_TIMEOUT_MILLIS = 15_000;
+    private static long TURN_TIMEOUT_MILLIS = 30_000;
 
     private List<ShiritoriPlayer> alivePlayers;
     private List<ShiritoriPlayer> deadPlayers;
