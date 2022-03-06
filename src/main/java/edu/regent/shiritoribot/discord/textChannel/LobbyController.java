@@ -16,8 +16,10 @@ import java.util.Map;
 
 public class LobbyController extends ChannelController {
     private static final String INITIAL_JOIN_TAG = "{shirijoin}";
-    private static final String ACTUAL_JOIN_MESSAGE = "Creating game of Shiritori\n React to this message to join";
     private static final String START_COMMAND = "!start";
+    private static final String ACTUAL_JOIN_MESSAGE = "Creating game of Shiritori\n React to this message to join\n " +
+            "type " + START_COMMAND + " once all players have joined" ;
+
 
 
 
