@@ -35,16 +35,22 @@ public class ActiveGameController extends ChannelController {
         this.alivePlayers = new ArrayList<>(initialPlayers);
         this.deadPlayers = new ArrayList<>();
         Collections.shuffle(alivePlayers);
-        activePlayer = alivePlayers.get(0); //will be skipped, get(1) will actually be first player to act)
+
     }
 
     @Override
     protected void init() {
         clearChannelHistory();
+        if(alivePlayers.isEmpty()) {
+            channel.sendMessage("Unable to start a game with no players").queue();
+            close();
+            return;
+        }
         for(ShiritoriPlayer player : alivePlayers) {
             player.setStatus(PlayerStatus.ALIVE);
         }
         wordValidator = new ShiritoriWordValidator(ShiritoriBot.getWordDictionary());
+        activePlayer = alivePlayers.get(0); //will be skipped, get(1) will actually be first player to act)
         nextPlayer();
     }
 
