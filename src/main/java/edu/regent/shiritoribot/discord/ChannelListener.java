@@ -39,11 +39,4 @@ public class ChannelListener extends ListenerAdapter {
     }
 
 
-
-    @Override
-    public void onGuildMessageReactionAdd(@Nonnull GuildMessageReactionAddEvent event) {
-        System.out.println("guild message reacted");
-    }
-
-
 }

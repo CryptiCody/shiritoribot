@@ -20,7 +20,6 @@ public interface WordDictionary {
         scanner.useDelimiter(Pattern.compile("[,\n]+"));
         List<String> wordList = new ArrayList<>();
         while(scanner.hasNext()) {
-            //System.out.println(scanner.next());
             wordList.add(scanner.next().trim());
         }
         return new SimpleWordDictionaryImpl(wordList);

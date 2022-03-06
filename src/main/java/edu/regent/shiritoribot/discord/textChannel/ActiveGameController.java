@@ -120,7 +120,6 @@ public class ActiveGameController extends ChannelController {
                 activePlayer = alivePlayers.get(indexOfNextPlayer);
             }
 
-            System.out.println("Next Player: " + activePlayer.getName());
             if(nextPlayerDisplayMessage != null) {
                 nextPlayerDisplayMessage.delete().complete();
             }

@@ -20,9 +20,6 @@ public class ShiritoriBot {
     public static JDA jda;
 
     public static void main(String[] args) {
-
-
-        System.out.println(System.getenv("Discord_Secret_Token"));
         JDABuilder builder = JDABuilder.createDefault(System.getenv("Discord_Secret_Token"));
         //JDABuilder builder = JDABuilder.create(DISCORD_SECRET_TOKEN, GatewayIntent.) todo: setup correct intents
         builder.addEventListeners(buildCommandManager());
