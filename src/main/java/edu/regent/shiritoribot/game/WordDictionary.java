@@ -2,7 +2,9 @@ package edu.regent.shiritoribot.game;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +18,11 @@ public interface WordDictionary {
     }
 
     public static WordDictionary fromFile(File file) throws IOException {
-        Scanner scanner = new Scanner(file);
+        return fromStream(new FileInputStream(file));
+    }
+
+    public static WordDictionary fromStream(InputStream inputStream) throws IOException {
+        Scanner scanner = new Scanner(inputStream);
         scanner.useDelimiter(Pattern.compile("[,\n]+"));
         List<String> wordList = new ArrayList<>();
         while(scanner.hasNext()) {

@@ -38,7 +38,8 @@ public class ShiritoriBot {
 
     public static WordDictionary getWordDictionary() {
         try {
-            return WordDictionary.fromFile(new File(ShiritoriBot.class.getClassLoader().getResource("CollinsScrabbleWords(2019).txt").getFile()));
+
+            return WordDictionary.fromStream(ShiritoriBot.class.getClassLoader().getResourceAsStream("CollinsScrabbleWords(2019).txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

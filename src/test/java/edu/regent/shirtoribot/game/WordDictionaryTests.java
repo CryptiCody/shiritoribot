@@ -39,4 +39,16 @@ public class WordDictionaryTests {
         assert(dict.contains("salt lake city")); //ensures multi-word names work
     }
 
+    @Test
+    public void fromStream_loadsAllWords() throws Exception {
+        var inputSteam = getClass().getClassLoader().getResourceAsStream("simpleDictionary.txt");
+        dict = WordDictionary.fromStream(inputSteam);
+
+        assert(dict.contains("europe"));
+        assert(dict.contains("neptune"));
+        assert(dict.contains("mars"));
+        assert(dict.contains("jupiter"));
+        assert(dict.contains("salt lake city")); //ensures multi-word names work
+    }
+
 }
