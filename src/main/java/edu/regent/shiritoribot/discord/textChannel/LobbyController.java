@@ -17,8 +17,9 @@ import java.util.Map;
 public class LobbyController extends ChannelController {
     private static final String INITIAL_JOIN_TAG = "{shirijoin}";
     private static final String START_COMMAND = "!start";
+    private static final String CANCEL_COMMAND = "!cancel";
     private static final String ACTUAL_JOIN_MESSAGE = "Creating game of Shiritori\n React to this message to join\n " +
-            "type " + START_COMMAND + " once all players have joined" ;
+            "type " + START_COMMAND + " once all players have joined or " + CANCEL_COMMAND + " to cancel the game" ;
 
 
 
@@ -53,11 +54,10 @@ public class LobbyController extends ChannelController {
             msg.editMessage(ACTUAL_JOIN_MESSAGE).queue();
             msg.addReaction("U+2705").queue();
             joinMsgID = msg.getId();
-            return;
-        }
-
-        if(isStartCommand(event)) {
+        } else if(isStartCommand(event)) {
             passControlTo(new ActiveGameController(channel, players.values()));
+        } else if(isCancelCommand(event)) {
+            passControlTo(new IdleController(channel));
         }
     }
 
@@ -91,5 +91,9 @@ public class LobbyController extends ChannelController {
 
     private boolean isStartCommand(GuildMessageReceivedEvent event) {
         return event.getMessage().getContentDisplay().equalsIgnoreCase(START_COMMAND);
+    }
+
+    private boolean isCancelCommand(GuildMessageReceivedEvent event) {
+        return event.getMessage().getContentDisplay().equalsIgnoreCase(CANCEL_COMMAND);
     }
 }
