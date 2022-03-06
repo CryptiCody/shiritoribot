@@ -5,14 +5,12 @@ import edu.regent.shiritoribot.discord.PlayerStatus;
 import edu.regent.shiritoribot.discord.ShiritoriPlayer;
 import edu.regent.shiritoribot.game.EliminationException;
 import edu.regent.shiritoribot.game.ShiritoriWordValidator;
-import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nonnull;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,10 +18,10 @@ import java.util.List;
 
 public class ActiveGameController extends ChannelController {
 
-    private static long TURN_TIMEOUT_MILLIS = 30_000;
+    private static final long TURN_TIMEOUT_MILLIS = 30_000;
 
-    private List<ShiritoriPlayer> alivePlayers;
-    private List<ShiritoriPlayer> deadPlayers;
+    private final List<ShiritoriPlayer> alivePlayers;
+    private final List<ShiritoriPlayer> deadPlayers;
     private ShiritoriPlayer activePlayer;
 
     private ShiritoriWordValidator wordValidator;
@@ -50,7 +48,7 @@ public class ActiveGameController extends ChannelController {
             player.setStatus(PlayerStatus.ALIVE);
         }
         wordValidator = new ShiritoriWordValidator(ShiritoriBot.getWordDictionary());
-        activePlayer = alivePlayers.get(0); //will be skipped, get(1) will actually be first player to act)
+        activePlayer = alivePlayers.get(0); //will be skipped, get(1) will actually be first player to act
         nextPlayer();
     }
 
@@ -78,7 +76,7 @@ public class ActiveGameController extends ChannelController {
 
     private void declareWinner(ShiritoriPlayer player) {
         player.setStatus(PlayerStatus.NO_VISIBLE_STATUS);
-        channel.sendMessage(player.getMember().getEffectiveName() + " WINS!").queue();
+        channel.sendMessage(player.getMember().getAsMention() + " WINS!").queue();
         close();
     }
 
@@ -123,7 +121,7 @@ public class ActiveGameController extends ChannelController {
             if(nextPlayerDisplayMessage != null) {
                 nextPlayerDisplayMessage.delete().complete();
             }
-            nextPlayerDisplayMessage = channel.sendMessage("Next Player: " + activePlayer.getName()).complete();
+            nextPlayerDisplayMessage = channel.sendMessage("Next Player: " + activePlayer.getMember().getAsMention()).complete();
 
             resetTimeout();
         }
